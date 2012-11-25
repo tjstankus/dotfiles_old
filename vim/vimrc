@@ -1,5 +1,81 @@
+"
+" pathogen
+"
 call pathogen#infect()
 syntax on
 filetype plugin indent on
 
+"
+" various settings based on http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+"
+set nocompatible
+set modelines=0
+
+" tabs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+" misc
+set encoding=utf-8
+set autoindent
+let mapleader = ","
 set number
+set hidden " allow unwritten buffers to be hidden
+set wildmenu
+set wildmode=list:longest
+set visualbell
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start " make backspace/delete work as expected
+set laststatus=2
+set noswapfile
+set nowrap
+set colorcolumn=81
+
+" search
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set hlsearch
+nnoremap <leader><space> :noh<cr>
+
+"
+" ctrl-p
+"
+let ctrlp_map = '<leader>t'
+nmap <leader>b :CtrlPBuffer<CR>
+
+"
+" nerdtree
+"
+let g:NERDTreeShowLineNumbers=1
+
+"
+" markdown headers
+"
+nnoremap <leader>1 yypVr=o<Esc>o<Esc>
+nnoremap <leader>2 yypVr-o<Esc>o<Esc>
+
+"
+" strip trailing whitespace
+"
+function! <SID>StripTrailingWhitespaces()
+    " save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " strip whitespace
+    %s/\s\+$//e
+    " restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" strip whitespace for all files on write
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+
