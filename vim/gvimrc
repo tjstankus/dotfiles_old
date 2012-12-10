@@ -1,6 +1,6 @@
 colorscheme Tomorrow-Night
 
-set guifont=Droid\ Sans\ Mono:h14
+set guifont=Droid\ Sans\ Mono:h15
 
 " disable blinking cursor
 set guicursor+=a:blinkon0

@@ -34,6 +34,7 @@ set laststatus=2
 set noswapfile
 set nowrap
 set colorcolumn=81
+set clipboard=unnamed " copy to OS copy buffer
 
 " search
 nnoremap / /\v
@@ -44,15 +45,35 @@ set hlsearch
 nnoremap <leader><space> :noh<cr>
 
 "
+" colors
+"
+colorscheme Tomorrow-Night
+
+"
 " ctrl-p
 "
 let ctrlp_map = '<leader>t'
 nmap <leader>b :CtrlPBuffer<CR>
+let g:ctrlp_dont_split = 'nerdtree'
 
 "
 " nerdtree
 "
 let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeShowHidden=1
+
+"
+" powerline
+"
+let g:Powerline_stl_path_style='short'
+
+"
+" vroom
+"
+let g:vroom_use_colors = 0
+let g:vroom_use_bundle_exec = 0
+let g:vroom_binstubs_path = './.binstubs'
+let g:vroom_use_binstubs = 1
 
 "
 " markdown headers
