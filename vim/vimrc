@@ -35,6 +35,7 @@ set noswapfile
 set nowrap
 set colorcolumn=81
 set clipboard=unnamed " copy to OS copy buffer
+set relativenumber
 
 " search
 nnoremap / /\v
@@ -99,4 +100,11 @@ endfunction
 " strip whitespace for all files on write
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+" soft wrap via :Wrap command
+command! -nargs=* Wrap set wrap linebreak nolist
 
+" save file when switch away, swallow errors
+autocmd BufLeave,FocusLost * silent! wall
+
+" remap . key in visual mode
+vnoremap . :norm.<CR>
