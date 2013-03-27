@@ -11,3 +11,7 @@
 	email = tj@stank.us
 [core]
 	excludesfile = /Users/tstankus/.gitignore
+[alias]
+  # https://gist.github.com/jasonrudolph/1810768
+  # http://stackoverflow.com/questions/2514172/listing-each-branch-and-its-last-revisions-date-in-git
+  branchdate = "!bash -c 'for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format=\"%ci %cr\" $branch | head -n 1` \t\t$branch; done | sort -r' -"
