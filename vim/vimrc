@@ -21,7 +21,7 @@ set expandtab
 set encoding=utf-8
 set autoindent
 let mapleader = ","
-set number
+set relativenumber
 set hidden " allow unwritten buffers to be hidden
 set wildmenu
 set wildmode=list:longest
@@ -35,7 +35,6 @@ set noswapfile
 set nowrap
 set colorcolumn=81
 set clipboard=unnamed " copy to OS copy buffer
-set relativenumber
 
 " search
 nnoremap / /\v
