@@ -107,3 +107,7 @@ autocmd BufLeave,FocusLost * silent! wall
 
 " remap . key in visual mode
 vnoremap . :norm.<CR>
+
+" go back to normal mode after save
+" works particularly well for macvim <D-s> saves
+autocmd BufWritePost * stopinsert
