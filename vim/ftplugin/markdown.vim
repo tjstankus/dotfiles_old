@@ -31,4 +31,4 @@ highlight CursorLine guibg=#1d1f21
 set textwidth=80
 
 " autoformat paragraphs
-set formatoptions+=a
+" set formatoptions+=a
