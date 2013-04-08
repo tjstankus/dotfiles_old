@@ -80,6 +80,7 @@ let g:vroom_use_binstubs = 1
 "
 nnoremap <leader>1 yypVr=o<Esc>o<Esc>
 nnoremap <leader>2 yypVr-o<Esc>o<Esc>
+nnoremap <leader>p gqip
 
 "
 " strip trailing whitespace
