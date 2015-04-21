@@ -11,17 +11,20 @@ filetype plugin indent on
 set nocompatible
 set modelines=0
 
+"
 " tabs
+"
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+"
 " misc
+"
 set encoding=utf-8
 set autoindent
 let mapleader = ","
-set relativenumber
 set hidden " allow unwritten buffers to be hidden
 set wildmenu
 set wildmode=list:longest
@@ -34,9 +37,23 @@ set laststatus=2
 set noswapfile
 set nowrap
 set colorcolumn=81
+set linespace=1
 set clipboard=unnamed " copy to OS copy buffer
+set nojoinspaces " only one space after a '.', '?', or '!'
+nnoremap <leader>w :w<cr>
+" imap jj <Esc>l:w<CR>
+inoremap <C-u> <Esc>:w<CR>l
 
+
+
+" these two settings in combination use relative numbering on all lines
+" except for the current line, which displays the absolute number
+set number
+set relativenumber
+
+"
 " search
+"
 nnoremap / /\v
 vnoremap / /\v
 set ignorecase
@@ -44,7 +61,16 @@ set smartcase
 set hlsearch
 nnoremap <leader><space> :noh<cr>
 
-"
+" terminal timeouts
+set timeoutlen=1000
+set ttimeoutlen=0
+
+" set the cursor to a vertical line in insert mode and a solid block
+" in command mode
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+
 " colors
 "
 colorscheme Tomorrow-Night
@@ -55,6 +81,12 @@ colorscheme Tomorrow-Night
 let ctrlp_map = '<leader>t'
 nmap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_dont_split = 'nerdtree'
+let g:ctrlp_custom_ignore = '\v[\/](doc|coverage|tmp|vendor)|(\.(swp|ico|git|svn))$'
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+"   \ }
 
 "
 " nerdtree
@@ -70,16 +102,32 @@ let g:Powerline_stl_path_style='short'
 "
 " vroom
 "
-let g:vroom_use_colors = 0
-let g:vroom_use_bundle_exec = 0
-let g:vroom_binstubs_path = './.binstubs'
-let g:vroom_use_binstubs = 1
+let g:vroom_use_colors = 1
+let g:vroom_use_bundle_exec = 1
+" let g:vroom_use_binstubs = 1
+" let g:vroom_binstubs_path = './.bundle/.binstubs'
+
+"
+" vim-flavored-markdown (github-flavored markdown for vim)
+" https://github.com/jtratner/vim-flavored-markdown
+"
+augroup markdown
+  au!
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
 
 "
 " markdown headers
 "
 nnoremap <leader>1 yypVr=o<Esc>o<Esc>
 nnoremap <leader>2 yypVr-o<Esc>o<Esc>
+
+" markdown fenced code blocks
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
+
+"
+" format paragraph
+"
 nnoremap <leader>p gqip
 
 "
@@ -112,3 +160,32 @@ vnoremap . :norm.<CR>
 " go back to normal mode after save
 " works particularly well for macvim <D-s> saves
 autocmd BufWritePost * stopinsert
+
+"
+" command shortcuts
+"
+command! Cpcc CtrlPClearCache
+command! Bdbd bufdo bdelete
+command! Ebd e `dirname %`
+
+"
+" Line number colors
+"
+" Entering insert mode
+autocmd InsertEnter * highlight CursorLineNr ctermbg=031
+" Leaving insert mode
+autocmd InsertLeave * highlight CursorLineNr ctermbg=235
+
+"
+" experimental
+"
+
+" avoid xattrs getting overwritten, especially for Deckset
+set backupcopy=yes
+
+"
+" temp
+"
+" nnoremap Q :!bundle exec rspec spec<CR>
+" nnoremap Q :!rspec spec/bowling_game_spec.rb<CR>
+" nnoremap Q :!ruby bottles/test/bottles_test.rb<CR>
